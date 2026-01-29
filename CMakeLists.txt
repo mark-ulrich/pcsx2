@@ -52,6 +52,9 @@ if(ENABLE_QT_UI)
 	add_subdirectory(pcsx2-qt)
 endif()
 
+# make rsync-ng
+add_subdirectory(resync-ng)
+
 # Updater is Windows only for now.
 if (WIN32)
 	add_subdirectory(updater)

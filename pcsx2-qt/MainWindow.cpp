@@ -21,6 +21,8 @@
 #include "Tools/InputRecording/InputRecordingViewer.h"
 #include "Tools/InputRecording/NewInputRecordingDlg.h"
 
+#include "../resync-ng/Resync.h"
+
 #if !defined(__APPLE__)
 #include "ShortcutCreationDialog.h"
 #endif
@@ -46,6 +48,7 @@
 #include "common/FileSystem.h"
 #include "common/Path.h"
 
+#include <iostream>
 #include <QtCore/QDateTime>
 #include <QtCore/QDir>
 #include <QtGui/QCloseEvent>
@@ -60,6 +63,15 @@
 #include "common/RedtapeWindows.h"
 #include <Dbt.h>
 #endif
+
+// resync-ng integration
+void MainWindow::ResyncNG_Init()
+{
+	// Handle resync-ng initialization
+	resync::ResyncPlugin* resyncPlugin = new resync::ResyncPlugin(this);
+	resyncPlugin->init(this);
+}
+// End resync-ng integration
 
 const char* MainWindow::OPEN_FILE_FILTER =
 	QT_TRANSLATE_NOOP("MainWindow", "All File Types (*.bin *.iso *.cue *.mdf *.chd *.cso *.zso *.gz *.elf *.irx *.gs *.gs.xz *.gs.zst *.dump);;"
@@ -153,6 +165,10 @@ void MainWindow::initialize()
 
 	if (Host::GetBoolSettingValue("EmuCore", "EnableMouseLock", false))
 		setupMouseMoveHandler();
+
+	// resync-ng integration
+	ResyncNG_Init();
+	// end resync-ng integration
 }
 
 // TODO: Figure out how to set this in the .ui file

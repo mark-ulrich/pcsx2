@@ -325,6 +325,11 @@ private:
 #ifdef _WIN32
 	void* m_device_notification_handle = nullptr;
 #endif
+
+	// resync-ng integration
+private:
+	void ResyncNG_Init();
+	// end resync-ng integration
 };
 
 extern MainWindow* g_main_window;

@@ -291,6 +291,9 @@ target_link_libraries(pcsx2-qt PRIVATE
 	Qt6::Gui
 	Qt6::Widgets
 	KDAB::kddockwidgets
+	resync-ng
+	stdc++
+	m
 )
 
 if(NOT WIN32 AND NOT APPLE)
